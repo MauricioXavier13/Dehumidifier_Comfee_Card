@@ -1,0 +1,344 @@
+########################
+######## Card ##########
+########################
+
+type: vertical-stack
+cards:
+  - type: entities
+    title: "Desumidificador \U0001F4A6"
+    show_header_toggle: false
+    entities:
+      - entity: humidifier.midea_dehumidifier_comfee
+        toggle: false
+        type: 'custom:multiple-entity-row'
+        name: Humidade
+        icon: 'mdi:water-percent'
+        state_header: State
+        entities:
+          - attribute: humidity
+            name: Target
+            unit: '%'
+          - attribute: current_humidity
+            name: Current
+    header:
+      type: picture
+      image: >-
+        https://www.vazamentos.info/wp-content/uploads/2019/06/Como-acabar-com-a-condensacao.jpg
+  - type: horizontal-stack
+    cards:
+      - type: 'custom:button-card'
+        tap_action:
+          action: call-service
+          service: humidifier.toggle
+          service_data:
+            entity_id: humidifier.midea_dehumidifier_comfee
+        entity_id: humidifier.midea_dehumidifier_comfee
+        entity: humidifier.midea_dehumidifier_comfee
+        extra_styles: |
+          @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(0); }
+            40% { transform: translateX(-15px); }
+            60% { transform: translateX(-10px); }
+          }
+        name: Desumidificador
+        icon: 'mdi:air-humidifier'
+        show_state: true
+        show_icon: true
+        show_name: false
+        styles:
+          card:
+            - background-color: red
+        state:
+          - value: 'on'
+            icon: 'mdi:tailwind'
+            styles:
+              card:
+                - background-color: limegreen
+              icon:
+                - icon: 'mdi:tailwind'
+                - color: white
+                - animation: bounce 2s infinite
+      - type: 'custom:button-card'
+        entity: humidifier.midea_dehumidifier_comfee
+        name: Vazio
+        show_icon: true
+        show_name: true
+        state:
+          - operator: template
+            value: |
+              [[[
+               return (states['humidifier.midea_dehumidifier_comfee'].attributes.tank_show === true)
+              ]]]
+            icon: 'mdi:beaker-alert'
+            color: white
+            name: Cheio
+            styles:
+              card:
+                - background-color: orange
+                - animation: blink 2s infinite
+          - operator: default
+            icon: 'mdi:beaker-outline'
+      - type: 'custom:button-card'
+        entity: humidifier.midea_dehumidifier_comfee
+        show_icon: true
+        show_name: true
+        state:
+          - operator: template
+            value: |
+              [[[
+               return (states['humidifier.midea_dehumidifier_comfee'].attributes.fan_speed === 80 ) && states['humidifier.midea_dehumidifier_comfee'].state === 'on'
+              ]]]
+            icon: 'mdi:fan'
+            color: yellow
+            name: 80
+            styles:
+              icon:
+                - animation:
+                    - rotating 0.5s linear infinite
+              card:
+                - color: yellow
+          - operator: template
+            value: |
+              [[[
+               return (states['humidifier.midea_dehumidifier_comfee'].attributes.fan_speed === 60 ) && states['humidifier.midea_dehumidifier_comfee'].state === 'on'
+              ]]]
+            icon: 'mdi:fan'
+            color: yellow
+            name: 60
+            styles:
+              icon:
+                - animation:
+                    - rotating 1s linear infinite
+              card:
+                - color: yellow
+          - operator: template
+            value: |
+              [[[
+               return (states['humidifier.midea_dehumidifier_comfee'].attributes.fan_speed === 40 ) && states['humidifier.midea_dehumidifier_comfee'].state === 'on'
+              ]]]
+            icon: 'mdi:fan'
+            color: yellow
+            name: 40
+            styles:
+              icon:
+                - animation:
+                    - rotating 2s linear infinite
+              card:
+                - color: yellow
+          - operator: default
+            icon: 'mdi:fan'
+            name: '0'
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - type: 'custom:text-divider-row'
+        text: Select Mode
+      - type: 'custom:paper-buttons-row'
+        buttons:
+          - tap_action:
+              action: call-service
+              service: humidifier.set_mode
+              service_data:
+                entity_id: humidifier.midea_dehumidifier_comfee
+                mode: Target_humidity
+            icon: 'mdi:water-percent'
+            layout: icon_name
+            name: Target
+            style:
+              button:
+                background-color: >
+                  {% if is_state_attr('humidifier.midea_dehumidifier_comfee',
+                  'mode', 'Target_humidity' ) and 
+                  is_state('humidifier.midea_dehumidifier_comfee', 'on') %}
+                    limegreen
+                  {% else%}
+                    
+                  {% endif %}
+                color: >
+                  {% if is_state_attr('humidifier.midea_dehumidifier_comfee',
+                  'mode', 'Target_humidity' ) and 
+                  is_state('humidifier.midea_dehumidifier_comfee', 'on') %}
+                   white
+                  {% else%}
+                    
+                  {% endif %}
+                border-radius: 10px
+                opacity: 1
+          - icon: 'mdi:robot'
+            tap_action:
+              action: call-service
+              service: humidifier.set_mode
+              service_data:
+                entity_id: humidifier.midea_dehumidifier_comfee
+                mode: Smart
+            layout: icon_name
+            name: Smart
+            style:
+              button:
+                background-color: >
+                  {% if is_state_attr('humidifier.midea_dehumidifier_comfee',
+                  'mode', 'Smart' ) and 
+                  is_state('humidifier.midea_dehumidifier_comfee', 'on') %}
+                    limegreen
+                  {% else%}
+                    
+                  {% endif %}
+                color: >
+                  {% if is_state_attr('humidifier.midea_dehumidifier_comfee',
+                  'mode', 'Smart' ) and 
+                  is_state('humidifier.midea_dehumidifier_comfee', 'on') %}
+                    white
+                  {% else%}
+                    
+                  {% endif %}
+                border-radius: 10px
+                opacity: 1
+          - icon: 'mdi:autorenew'
+            name: Continuos
+            layout: icon_name
+            tap_action:
+              action: call-service
+              service: humidifier.set_mode
+              service_data:
+                entity_id: humidifier.midea_dehumidifier_comfee
+                mode: Continuos
+            style:
+              button:
+                background-color: >
+                  {% if is_state_attr('humidifier.midea_dehumidifier_comfee',
+                  'mode', 'Continuos' ) and 
+                  is_state('humidifier.midea_dehumidifier_comfee', 'on') %}
+                    limegreen
+                  {% else%}
+                    
+                  {% endif %}
+                color: >
+                  {% if is_state_attr('humidifier.midea_dehumidifier_comfee',
+                  'mode', 'Continuos' ) and 
+                  is_state('humidifier.midea_dehumidifier_comfee', 'on') %}
+                    white
+                  {% else%}
+                    
+                  {% endif %}
+                border-radius: 10px
+                opacity: 1
+          - icon: 'mdi:tshirt-crew'
+            name: Dryer
+            layout: icon_name
+            tap_action:
+              action: call-service
+              service: humidifier.set_mode
+              service_data:
+                entity_id: humidifier.midea_dehumidifier_comfee
+                mode: Dryer
+            style:
+              button:
+                background-color: >
+                  {% if is_state_attr('humidifier.midea_dehumidifier_comfee',
+                  'mode', 'Dryer' ) and 
+                  is_state('humidifier.midea_dehumidifier_comfee', 'on') %}
+                    limegreen
+                  {% else%}
+                    
+                  {% endif %}
+                color: >
+                  {% if is_state_attr('humidifier.midea_dehumidifier_comfee',
+                  'mode', 'Dryer' ) and 
+                  is_state('humidifier.midea_dehumidifier_comfee', 'on') %}
+                    white
+                  {% else%}
+                    
+                  {% endif %}
+                border-radius: 10px
+                opacity: 1
+      - type: 'custom:text-divider-row'
+        text: Select Fan Speed
+      - type: 'custom:paper-buttons-row'
+        buttons:
+          - icon: 'mdi:fan-speed-1'
+            name: Silent
+            layout: icon_name
+            tap_action:
+              action: call-service
+              service: midea_dehumidifier.set_fan_speed
+              service_data:
+                entity_id: humidifier.midea_dehumidifier_comfee
+                fan_speed: Silent
+            style:
+              button:
+                background-color: >
+                  {% if is_state_attr('humidifier.midea_dehumidifier_comfee',
+                  'fan_speed_mode', 'Silent' ) and 
+                  is_state('humidifier.midea_dehumidifier_comfee', 'on') %}
+                    limegreen
+                  {% else%}
+                    
+                  {% endif %}
+                color: >
+                  {% if is_state_attr('humidifier.midea_dehumidifier_comfee',
+                  'fan_speed_mode', 'Silent' ) and 
+                  is_state('humidifier.midea_dehumidifier_comfee', 'on') %}
+                    white
+                  {% else%}
+                    
+                  {% endif %}
+                border-radius: 10px
+                opacity: 1
+          - icon: 'mdi:fan-speed-2'
+            name: Medium
+            layout: icon_name
+            tap_action:
+              action: call-service
+              service: midea_dehumidifier.set_fan_speed
+              service_data:
+                entity_id: humidifier.midea_dehumidifier_comfee
+                fan_speed: Medium
+            style:
+              button:
+                background-color: >
+                  {% if is_state_attr('humidifier.midea_dehumidifier_comfee',
+                  'fan_speed_mode', 'Medium' ) and 
+                  is_state('humidifier.midea_dehumidifier_comfee', 'on') %}
+                    limegreen
+                  {% else%}
+                    
+                  {% endif %}
+                color: >
+                  {% if is_state_attr('humidifier.midea_dehumidifier_comfee',
+                  'fan_speed_mode', 'Medium' ) and 
+                  is_state('humidifier.midea_dehumidifier_comfee', 'on') %}
+                    white
+                  {% else%}
+                    
+                  {% endif %}
+                border-radius: 10px
+                opacity: 1
+          - icon: 'mdi:fan-speed-3'
+            name: High
+            layout: icon_name
+            tap_action:
+              action: call-service
+              service: midea_dehumidifier.set_fan_speed
+              service_data:
+                entity_id: humidifier.midea_dehumidifier_comfee
+                fan_speed: High
+            style:
+              button:
+                background-color: >
+                  {% if is_state_attr('humidifier.midea_dehumidifier_comfee',
+                  'fan_speed_mode', 'High' ) and 
+                  is_state('humidifier.midea_dehumidifier_comfee', 'on') %}
+                    limegreen
+                  {% else%}
+                    
+                  {% endif %}
+                color: >
+                  {% if is_state_attr('humidifier.midea_dehumidifier_comfee',
+                  'fan_speed_mode', 'High' ) and 
+                  is_state('humidifier.midea_dehumidifier_comfee', 'on') %}
+                    white
+                  {% else%}
+                    
+                  {% endif %}
+                border-radius: 10px
+                opacity: 1
