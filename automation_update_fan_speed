@@ -1,0 +1,18 @@
+### When changing fan speed, the button takes a bunch of seconds to update de state and the attribute of the entity ###
+### With this automation you force an entity update when changing fan speed and the attributes status is updated with less time ###
+
+alias: Update Comfee Fan Speed
+description: ''
+trigger:
+  - platform: event
+    event_type: call_service
+    event_data:
+      domain: midea_dehumidifier
+      service: set_fan_speed
+condition: []
+action:
+  - service: homeassistant.update_entity
+    data:
+      entity_id: humidifier.midea_dehumidifier_comfee
+    entity_id: humidifier.midea_dehumidifier_comfee
+mode: single
