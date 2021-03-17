@@ -7,6 +7,7 @@ Pre-requisites:
     - custom:button-card | https://github.com/custom-cards/button-card
     - custom:text-divider-row | https://github.com/iantrich/text-divider-row
     - custom:paper-buttons-row | https://github.com/jcwillox/lovelace-paper-buttons-row
+    - card-tools | https://github.com/thomasloven/lovelace-card-tools
     
 If you're using the same dehumidifier model/brand you just need to copy all the card code and replace the entity_id by your own.
 
