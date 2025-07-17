@@ -13,11 +13,5 @@ If you're using the same dehumidifier model/brand you just need to copy all the 
 <img width="459" height="827" alt="image" src="https://github.com/user-attachments/assets/92f6c463-d488-48d1-87ee-4b2ebe1b1922" />
 
 
-https://user-images.githubusercontent.com/74264882/111458565-7a3ddb00-8711-11eb-9adb-d3d79542a32d.mp4
-
-
-https://user-images.githubusercontent.com/74264882/111458584-7f9b2580-8711-11eb-918c-27fb9ca7ebe4.mp4
-
-
     
 
