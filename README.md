@@ -11,7 +11,7 @@ Pre-requisites:
     
 If you're using the same dehumidifier model/brand you just need to copy all the card code and replace the entity_id by your own.
 
-![image](https://user-images.githubusercontent.com/74264882/111458326-35b23f80-8711-11eb-8bf3-e8332f09653a.png)
+![image](<img width="459" height="827" alt="image" src="https://github.com/user-attachments/assets/af55a230-1792-45d8-85fc-3d2b86e57869" />)
 
 
 https://user-images.githubusercontent.com/74264882/111458565-7a3ddb00-8711-11eb-9adb-d3d79542a32d.mp4
