@@ -10,8 +10,7 @@ Pre-requisites:
     - card-tools | https://github.com/thomasloven/lovelace-card-tools
     
 If you're using the same dehumidifier model/brand you just need to copy all the card code and replace the entity_id by your own.
-
-![image](<img width="459" height="827" alt="image" src="https://github.com/user-attachments/assets/af55a230-1792-45d8-85fc-3d2b86e57869" />)
+<img width="459" height="827" alt="image" src="https://github.com/user-attachments/assets/92f6c463-d488-48d1-87ee-4b2ebe1b1922" />
 
 
 https://user-images.githubusercontent.com/74264882/111458565-7a3ddb00-8711-11eb-9adb-d3d79542a32d.mp4
